@@ -1,9 +1,9 @@
 'use strict';
 
-let screenPrice = 1000,
-    rollback = 30,
+let rollback = 30,
     title = prompt('Как называется ваш проект?'),
     screens = prompt('Какие типы экранов нужно разработать?'),
+    screenPrice = prompt('Сколько будет стоить данная работа?'),
     adaptive = !!prompt('Нужен ли адаптив на сайте?');
 
 let service1 = prompt('Какой дополнительный тип услуги нужен?'),
