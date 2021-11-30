@@ -4,42 +4,62 @@ let rollback = 30,
     title = prompt('Как называется ваш проект?'),
     screens = prompt('Какие типы экранов нужно разработать?'),
     screenPrice = prompt('Сколько будет стоить данная работа?'),
-    adaptive = !!prompt('Нужен ли адаптив на сайте?');
-
-let service1 = prompt('Какой дополнительный тип услуги нужен?'),
+    adaptive = !!prompt('Нужен ли адаптив на сайте?'),
+    service1 = prompt('Какой дополнительный тип услуги нужен?'),
     servicePrice1 = +prompt('Сколько это будет стоить?'),
     service2 = prompt('Какой еще дополнительный тип услуги нужен?'),
-    servicePrice2 = +prompt('Скольqweко это будет стоить?'),
-    fullPrice = screenPrice + servicePrice1 + servicePrice2;
+    servicePrice2 = +prompt('Сколько это будет стоить?'),
+    allServicePrices,
+    servicePercentPrice,
+    fullPrice;
 
+const showTypeOf = function (variable) {
+    console.log(variable, typeof variable);
+};
 
-console.log(typeof title);
-console.log(typeof fullPrice);
-console.log(typeof adaptive);
+const getRollbackMessage = function (price) {
+    switch (true) {
+        case price >= 30000:
+            return 'Даем скидку в 10%';
+        case price >= 15000 && price < 30000:
+            return 'Даем скидку в 5%';
+        case price < 15000 && price >= 0:
+            return 'Скидка не предусмотрена';
+        default:
+            return 'Что-то пошло не так';
+    }
+};
 
-console.log(screens.length);
+const getAllServicePrices = function (servicePrice1, servicePrice2) {
+    return Number(servicePrice1) + servicePrice2;
+};
 
-console.log('Стоимость верстки экранов ' + screenPrice + ' рублей');
-console.log('Стоимость разработки сайта ' + fullPrice + ' рублей');
-
-screens = screens.toLowerCase();
-console.log(screens.split(', '));
-
-console.log(fullPrice * (rollback / 100));
-
-let servicePercentPrice = Math.round(fullPrice - (fullPrice * (rollback / 100)));
-console.log(servicePercentPrice);
-
-switch (true) {
-    case fullPrice >= 30000:
-        console.log('Даем скидку в 10%');
-        break;
-    case fullPrice >= 15000 && fullPrice < 30000:
-        console.log('Даем скидку в 5%');
-        break;
-    case fullPrice < 15000 && fullPrice >= 0:
-        console.log('Скидка не предусмотрена');
-        break;
-    default:
-        console.log('Что-то пошло не так');
+function getFullPrice(priceForScreen, allPrice) {
+    return Number(priceForScreen) + allPrice;
 }
+
+const getServicePercentPrice = function (price, roll) {
+    return Math.round(price - (price * (roll / 100)));
+};
+
+const getTitle = function (chars) {
+    chars = chars.trim();
+    chars = chars.toLowerCase();
+    return chars[0].toUpperCase() + chars.substring(1);
+};
+
+const getArray = function (str) {
+    return str.split(', ');
+};
+
+allServicePrices = getAllServicePrices(servicePrice1, servicePrice2);
+fullPrice = getFullPrice(screenPrice, allServicePrices);
+
+
+showTypeOf(getTitle(title));
+showTypeOf(fullPrice);
+showTypeOf(adaptive);
+
+console.log(screens);
+console.log(getRollbackMessage(fullPrice));
+console.log(getServicePercentPrice(fullPrice, rollback));
