@@ -3,7 +3,7 @@
 let rollback = 30,
     title = prompt('Как называется ваш проект?'),
     screens = prompt('Какие типы экранов нужно разработать?'),
-    screenPrice = prompt('Сколько будет стоить данная работа?'),
+    screenPrice = +prompt('Сколько будет стоить данная работа?'),
     adaptive = !!prompt('Нужен ли адаптив на сайте?'),
     service1 = prompt('Какой дополнительный тип услуги нужен?'),
     servicePrice1 = +prompt('Сколько это будет стоить?'),
@@ -31,11 +31,11 @@ const getRollbackMessage = function (price) {
 };
 
 const getAllServicePrices = function (servicePrice1, servicePrice2) {
-    return Number(servicePrice1) + servicePrice2;
+    return servicePrice1 + servicePrice2;
 };
 
 function getFullPrice(priceForScreen, allPrice) {
-    return Number(priceForScreen) + allPrice;
+    return priceForScreen + allPrice;
 }
 
 const getServicePercentPrice = function (price, roll) {
