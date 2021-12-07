@@ -115,5 +115,48 @@ const appData = {
     }
 };
 
-appData.start();
+const title = document.getElementsByTagName('h1')[0],
+    buttonStart = document.getElementsByClassName('handler_btn')[0],
+    buttonReset = document.getElementsByClassName('handler_btn')[1],
+    screenButton = document.querySelector('.screen-btn'),
+    percentItems = document.querySelectorAll('.other-items.percent'),
+    numberItems = document.querySelectorAll('.other-items.number'),
+    typeRange = document.querySelector(".rollback input[type=range]"),
+    span = document.querySelector(".rollback span.range-value"),
+
+    total = document.getElementsByClassName('total-input')[0],
+    totalCount = document.getElementsByClassName('total-input')[1],
+    totalCountOther = document.getElementsByClassName('total-input')[2],
+    totalFullCount = document.getElementsByClassName('total-input')[3],
+    totalCountRollback = document.getElementsByClassName('total-input')[4];
+let screens = document.querySelectorAll('.screen');
+
+const elementsLog = function () {
+    console.log('----1 пункт----');
+    console.log(title);
+    console.log('----2 пункт----');
+    console.log(buttonStart);
+    console.log(buttonReset);
+    console.log('----3 пункт----');
+    console.log(screenButton);
+    console.log('----4 пункт----');
+    console.log(percentItems);
+    console.log(numberItems);
+    console.log('----5 пункт----');
+    console.log(typeRange);
+    console.log('----6 пункт----');
+    console.log(span);
+    console.log('----7 пункт----');
+    console.log(total);
+    console.log(totalCount);
+    console.log(totalCountOther);
+    console.log(totalFullCount);
+    console.log(totalCountRollback);
+    console.log('----8 пункт----');
+    console.log(screens);
+};
+elementsLog();
+//appData.start();
+
+
 
