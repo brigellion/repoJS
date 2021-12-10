@@ -1,5 +1,21 @@
 'use strict';
 
+const title = document.getElementsByTagName('h1')[0],
+    buttonStart = document.getElementsByClassName('handler_btn')[0],
+    buttonReset = document.getElementsByClassName('handler_btn')[1],
+    screenButton = document.querySelector('.screen-btn'),
+    percentItems = document.querySelectorAll('.other-items.percent'),
+    numberItems = document.querySelectorAll('.other-items.number'),
+    typeRange = document.querySelector(".rollback input[type=range]"),
+    span = document.querySelector(".rollback span.range-value"),
+
+    total = document.getElementsByClassName('total-input')[0],
+    totalCount = document.getElementsByClassName('total-input')[1],
+    totalCountOther = document.getElementsByClassName('total-input')[2],
+    totalFullCount = document.getElementsByClassName('total-input')[3],
+    totalCountRollback = document.getElementsByClassName('total-input')[4];
+let screens = document.querySelectorAll('.screen');
+
 const appData = {
     title: '',
     screens: [],
@@ -10,6 +26,13 @@ const appData = {
     fullPrice: 0,
     servicePercentPrice: 0,
     services: {},
+    init: function () {
+        appData.addTitle();
+        appData.start();
+    },
+    addTitle: function () {
+        console.log(title);
+    },
     asking: function () {
         do {
             appData.title = prompt('Как называется ваш проект?');
@@ -98,12 +121,12 @@ const appData = {
         return str.split(', ');
     },
     start: function () {
-        appData.asking();
+        /*appData.asking();
         appData.addPrices();
         appData.getFullPrice(appData.screenPrice, appData.allServicePrices);
         appData.getServicePercentPrice(appData.fullPrice, appData.rollback);
         appData.getTitle(appData.title);
-        this.logger();
+        this.logger();*/
     },
     logger: function () {
         console.log('AllServicePrices: ', appData.allServicePrices);
@@ -115,21 +138,7 @@ const appData = {
     }
 };
 
-const title = document.getElementsByTagName('h1')[0],
-    buttonStart = document.getElementsByClassName('handler_btn')[0],
-    buttonReset = document.getElementsByClassName('handler_btn')[1],
-    screenButton = document.querySelector('.screen-btn'),
-    percentItems = document.querySelectorAll('.other-items.percent'),
-    numberItems = document.querySelectorAll('.other-items.number'),
-    typeRange = document.querySelector(".rollback input[type=range]"),
-    span = document.querySelector(".rollback span.range-value"),
 
-    total = document.getElementsByClassName('total-input')[0],
-    totalCount = document.getElementsByClassName('total-input')[1],
-    totalCountOther = document.getElementsByClassName('total-input')[2],
-    totalFullCount = document.getElementsByClassName('total-input')[3],
-    totalCountRollback = document.getElementsByClassName('total-input')[4];
-let screens = document.querySelectorAll('.screen');
 
 const elementsLog = function () {
     console.log('----1 пункт----');
@@ -155,8 +164,7 @@ const elementsLog = function () {
     console.log('----8 пункт----');
     console.log(screens);
 };
-elementsLog();
-//appData.start();
+appData.init();
 
 
 
