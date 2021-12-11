@@ -14,9 +14,9 @@ const title = document.getElementsByTagName('h1')[0],
     totalFullCount = document.getElementsByClassName('total-input')[3],
     totalCountRollback = document.getElementsByClassName('total-input')[4];
 let screens = document.querySelectorAll('.screen');
-let flag = 0;
 
 const appData = {
+    flag: false,
     title: '',
     screens: [],
     totalScreensCount: 0,
@@ -43,7 +43,7 @@ const appData = {
         totalCountRollback.value = appData.servicePercentPrice;
     },
     showValueRange: function () {
-        if (!flag) {
+        if (!appData.flag) {
             span.textContent = typeRange.value + '%';
             appData.rollback = typeRange.value;
         } else {
@@ -52,29 +52,22 @@ const appData = {
             appData.servicePercentPrice = Math.round(appData.fullPrice - (appData.fullPrice * (appData.rollback / 100)));
             totalCountRollback.value = appData.servicePercentPrice;
         }
-        flag = !flag;
+        appData.flag = !appData.flag;
     },
     start: function () {
-        appData.screens.length = 0;
+        appData.screens = [];
         appData.addScreens();
-        let found = false;
-        for (let i = 0; i < appData.screens.length; i++) {
-            if (appData.screens[i].price === 0) {
-                found = true;
-                break;
-            }
-        }
+        let found = appData.screens.some(function (screen) {
+            return screen.price === 0;
+        });
         if (found) {
             alert('Заполните информацию об экранах!');
-            console.log(found);
-            console.log(appData.screens);
         } else {
             appData.addServices();
             appData.addPrices();
             appData.showResult();
-            flag = 1;
+            appData.flag = 1;
         }
-
     },
     addScreens: function () {
         screens = document.querySelectorAll('.screen');
@@ -160,32 +153,6 @@ const appData = {
     }
 };
 
-
-
-const elementsLog = function () {
-    console.log('----1 пункт----');
-    console.log(title);
-    console.log('----2 пункт----');
-    console.log(startBtn);
-    console.log(buttonReset);
-    console.log('----3 пункт----');
-    console.log(plusBtn);
-    console.log('----4 пункт----');
-    console.log(otherItemsPercent);
-    console.log(otherItemsNumber);
-    console.log('----5 пункт----');
-    console.log(typeRange);
-    console.log('----6 пункт----');
-    console.log(span);
-    console.log('----7 пункт----');
-    console.log(total);
-    console.log(totalCount);
-    console.log(totalCountOther);
-    console.log(totalFullCount);
-    console.log(totalCountRollback);
-    console.log('----8 пункт----');
-    console.log(screens);
-};
 appData.init();
 
 
