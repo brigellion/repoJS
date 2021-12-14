@@ -108,6 +108,7 @@ const appData = {
         viewsSelect.selectedIndex = 0;
         typeRange.value = 0;
         span.textContent = '';
+        this.rollback = 0;
         this.clearServices();
         this.resetResult();
         cmsCheckBox.checked = false;
