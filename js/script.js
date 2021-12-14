@@ -106,7 +106,8 @@ const appData = {
         document.querySelector('.screen').querySelector('input').value = '';
         screens = document.querySelectorAll('.screen');
         viewsSelect.selectedIndex = 0;
-
+        typeRange.value = 0;
+        span.textContent = '';
         this.clearServices();
         this.resetResult();
         cmsCheckBox.checked = false;
