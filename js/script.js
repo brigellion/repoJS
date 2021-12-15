@@ -104,19 +104,22 @@ const appData = {
         });
         document.querySelector('.screen').querySelector('select').selectedIndex = 0;
         document.querySelector('.screen').querySelector('input').value = '';
+        otherSelect.querySelector('input[type=text]').value = '';
         screens = document.querySelectorAll('.screen');
         viewsSelect.selectedIndex = 0;
         typeRange.value = 0;
-        span.textContent = '';
+        span.textContent = '0%';
         this.rollback = 0;
         this.clearServices();
         this.resetResult();
+        this.cmsPrice = 0;
         cmsCheckBox.checked = false;
         cmsVariants.style.display = 'none';
-
+        otherSelect.style.display = 'none';
         elementsSelect.disabled = false;
         startBtn.style.display = 'block';
         buttonReset.style.display = 'none';
+
 
     },
     start: function () {
@@ -128,6 +131,7 @@ const appData = {
         if (found) {
             alert('Заполните информацию об экранах!');
         } else {
+            if (!cmsCheckBox.checked || viewsSelect.options[viewsSelect.selectedIndex].value == '') this.cmsPrice = 0;
             this.addServices();
             this.addPrices();
             this.showResult();
@@ -189,6 +193,8 @@ const appData = {
                 check.checked = false;
                 input.value = '';
             }
+            this.servicesPercent = {};
+            console.log(this.servicesPercent);
         });
 
         otherItemsNumber.forEach((item) => {
@@ -198,7 +204,9 @@ const appData = {
                 check.checked = false;
                 input.value = '';
             }
-
+            this.servicesNumber = {};
+            this.servicePricesNumber = 0;
+            this.servicePricesPercent = 0;
         });
     },
     addScreenBlock: function () {
@@ -219,8 +227,12 @@ const appData = {
         for (let key in this.servicesPercent) {
             this.servicePricesPercent += this.screenPrice * (this.servicesPercent[key] / 100);
         }
-        if (viewsSelect.options[viewsSelect.selectedIndex].value == 'other') {
-            this.cmsPrice = +otherSelect.querySelector('input[type=text]').value;
+        if (viewsSelect.options[viewsSelect.selectedIndex].value == 'other' && cmsCheckBox.checked) {
+            if (+otherSelect.querySelector('input[type=text]').value > 0) {
+                this.cmsPrice = +otherSelect.querySelector('input[type=text]').value;
+            } else {
+                this.invisibleCms();
+            }
         }
         this.fullPrice = this.screenPrice + this.servicePricesNumber + this.servicePricesPercent;
         this.fullPrice += this.fullPrice * (this.cmsPrice / 100);
@@ -230,6 +242,10 @@ const appData = {
         this.totalScreensCount = this.screens.reduce((sum, current) => {
             return sum + Number(current.count);
         }, 0);
+    },
+    invisibleCms: function () {
+        cmsCheckBox.checked = false;
+        cmsVariants.style.display = 'none';
     },
     showTypeOf: function (variable) {
         console.log(variable, typeof variable);
