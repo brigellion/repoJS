@@ -188,10 +188,8 @@ const appData = {
     clearServices: function () {
         otherItemsPercent.forEach((item) => {
             const check = item.querySelector('input[type=checkbox]');
-            const input = item.querySelector('input[type=text]');
             if (check.checked) {
                 check.checked = false;
-                input.value = '';
             }
             this.servicesPercent = {};
             console.log(this.servicesPercent);
