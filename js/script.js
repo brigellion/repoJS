@@ -197,10 +197,8 @@ const appData = {
 
         otherItemsNumber.forEach((item) => {
             const check = item.querySelector('input[type=checkbox]');
-            const input = item.querySelector('input[type=text]');
             if (check.checked) {
                 check.checked = false;
-                input.value = '';
             }
             this.servicesNumber = {};
             this.servicePricesNumber = 0;
